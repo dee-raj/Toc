@@ -29,5 +29,5 @@ def q2(s,i):
   else:
     q2(s,i+1)
 w='101101'
-print(f"is {w} divisible by 2 ?")
+print(f"is {w} divisible by 2 ?\nThe transition states are: ")
 q1(w,0)
