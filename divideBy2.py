@@ -12,7 +12,7 @@ def q0(s,i):
 def q1(s,i):
   print("Q0=> ",end='')
   if i==len(s):
-    print("not final state, number is not divisible by 2")
+    print("final state, number is divisible by 2")
     return
   if s[i]=='0':
     q1(s,i+1)
