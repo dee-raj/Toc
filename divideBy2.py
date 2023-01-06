@@ -28,7 +28,8 @@ def q2(s,i):
     q1(s,i+1)
   else:
     q2(s,i+1)
-w='101101'
+
+# w='101101'
 w='0010010'
 print(f"is '{w}' divisible by 2?")
 q1(w,0)
