@@ -1,0 +1,169 @@
+//activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <EditText android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/firstnum"
+                android:hint="Enter the first number:"
+        android:textSize="90px"
+        tools:ignore="MissingConstraints" />
+    <EditText android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/secondnum"
+        android:hint="Enter the second number:"
+        android:textSize="90px"
+
+        tools:ignore="MissingConstraints" />
+    <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/result"
+        android:hint="Result"
+
+        android:textSize="90px"
+        />
+    <LinearLayout android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+
+
+        <Button  android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/addition"
+            android:text="+"
+            android:textColor="@color/black"
+            />
+        <Button  android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/subtraction"
+            android:text="-"
+            />
+        <Button  android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/multiplication"
+            android:text="*"
+            />
+        <Button  android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/division"
+            android:text="/"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
+
+//MainActivity.kt
+
+package com.example.myapplication
+
+import android.annotation.SuppressLint
+import android.graphics.Insets.add
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        var addy = findViewById<Button>(R.id.addition)
+        addy.setOnClickListener{ add()}
+
+        var subt = findViewById<Button>(R.id.subtraction)
+        subt.setOnClickListener{ sub()}
+
+        var mult = findViewById<Button>(R.id.multiplication)
+        mult.setOnClickListener{ mul()}
+
+        var divi = findViewById<Button>(R.id.division)
+        divi.setOnClickListener{ div()}
+
+
+    }
+
+    fun inputIsValid() {
+        var b = true;
+        var firstnum = findViewById<EditText>(R.id.firstnum)
+        var num1 = firstnum.text.toString().trim()
+
+        var secondnum = findViewById<EditText>(R.id.secondnum)
+        var num2 = secondnum.text.toString().trim()
+
+        if (firstnum.text.toString().trim().isEmpty()) {
+            firstnum.error = "Required"
+            firstnum.requestFocus()
+            b = false;
+        }
+    }
+
+
+    fun add(){
+        var firstnum = findViewById<EditText>(R.id.firstnum)
+        var num1=firstnum.text.toString().trim()
+
+        var secondnum = findViewById<EditText>(R.id.secondnum)
+        var num2=secondnum.text.toString().trim()
+
+        var result = findViewById<TextView>(R.id.result)
+        result.text= (Integer.parseInt(num1) + Integer.parseInt(num2)).toString()
+
+
+    }
+    fun sub(){
+        var firstnum = findViewById<EditText>(R.id.firstnum)
+        var num1=firstnum.text.toString().trim()
+
+        var secondnum = findViewById<EditText>(R.id.secondnum)
+        var num2=secondnum.text.toString().trim()
+
+        var result = findViewById<TextView>(R.id.result)
+        result.text= (Integer.parseInt(num1) - Integer.parseInt(num2)).toString()
+
+
+    }
+
+
+    fun mul(){
+        var firstnum = findViewById<EditText>(R.id.firstnum)
+        var num1=firstnum.text.toString().trim()
+
+        var secondnum = findViewById<EditText>(R.id.secondnum)
+        var num2=secondnum.text.toString().trim()
+
+        var result = findViewById<TextView>(R.id.result)
+        result.text= (Integer.parseInt(num1) * Integer.parseInt(num2)).toString()
+
+
+    }
+    fun div(){
+        var firstnum = findViewById<EditText>(R.id.firstnum)
+        var num1=firstnum.text.toString().trim()
+
+        var secondnum = findViewById<EditText>(R.id.secondnum)
+        var num2=secondnum.text.toString().trim()
+
+        var result = findViewById<TextView>(R.id.result)
+        result.text= (Integer.parseInt(num1) / Integer.parseInt(num2)).toString()
+
+
+    }
+}
+
+
+
+
+

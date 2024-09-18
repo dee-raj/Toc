@@ -1,0 +1,78 @@
+activity_main.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+MainActivity.kt
+
+package com.example.activitylifecycle
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        print("------------start--------------")
+    }
+
+    override fun onRestart(){
+        super.onRestart()
+            print("-----------Restart-----------")
+
+    }
+
+    override fun onDestroy(){
+        super.onDestroy()
+            print("-----------Destroy-----------")
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+            print("------------Resume-----------------")
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+            print("--------------Pause------------------")
+
+    }
+
+    override fun onStop() {
+        super.onStop()
+            print("--------------Stop---------------------")
+
+    }
+
+    fun print(msg: String){
+       android.util.Log.d("Activity State: ",msg)
+    }
+
+}

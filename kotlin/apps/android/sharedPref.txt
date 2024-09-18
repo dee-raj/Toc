@@ -1,0 +1,165 @@
+//activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:layout_width="490dp"
+        android:layout_height="797dp">
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter ID:" />
+
+            <EditText
+                android:id="@+id/id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Id: " />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter Name:" />
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Id: " />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="your ID: " />
+
+            <TextView
+                android:id="@+id/showid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Showing Name:" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="your Name: " />
+
+            <TextView
+                android:id="@+id/showname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Showing Name:" />
+        </TableRow>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="clear" />
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="save" />
+        <Button
+            android:id="@+id/view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="view" />
+
+    </LinearLayout>
+    </TableLayout>
+</LinearLayout>
+
+
+
+//MainActivity.kt
+package com.example.sharedpreferences
+
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
+
+class MainActivity : AppCompatActivity() {
+
+    private val sharedPreFile = "kotlinsharepreferences"
+
+    @SuppressLint("WrongViewCast")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val inputId= findViewById<EditText>(R.id.id)
+        val inputName= findViewById<EditText>(R.id.name)
+        val outputId= findViewById<TextView>(R.id.showid)
+        val outputName= findViewById<TextView>(R.id.showname)
+        val cls= findViewById<Button>(R.id.clear)
+        val save= findViewById<Button>(R.id.save)
+        val view= findViewById<Button>(R.id.view)
+
+        val sharedPreferences:SharedPreferences = this.getSharedPreferences(sharedPreFile, MODE_PRIVATE)
+
+        cls.setOnClickListener(View.OnClickListener {
+            val editor =sharedPreferences.edit()
+            editor.clear()
+            editor.apply()
+
+            outputId.setText(null)
+            outputName.setText(null)
+            Toast.makeText(this,"name and id is cleared from sharedPreferences",Toast.LENGTH_SHORT).show()
+        })
+        save.setOnClickListener(View.OnClickListener {
+            val id:Int = Integer.parseInt(inputId.text.toString())
+            val name:String = inputName.text.toString()
+            val editor:SharedPreferences.Editor = sharedPreferences.edit()
+
+            editor.putInt("Id_key",id)
+            editor.putString("Name_key",name)
+            editor.apply()
+            editor.commit()
+            Toast.makeText(this,"name and id is saved to sharedPreferences",Toast.LENGTH_SHORT).show()
+        })
+        view.setOnClickListener(View.OnClickListener {
+            val idvalue = sharedPreferences.getInt("Id_key",0)
+            val namevalue = sharedPreferences.getString("Name_key","defaultName")
+            if(idvalue.equals(0) && namevalue.equals("")){
+                outputId.setText("default id= ${idvalue}")
+                outputName.setText("default name= ${namevalue.toString()}")
+            }else{
+                outputId.setText(idvalue).toString()
+                outputName.setText(namevalue).toString()
+            }
+            Toast.makeText(this,"name and id is displayed",Toast.LENGTH_SHORT).show()
+        })
+    }
+
+}

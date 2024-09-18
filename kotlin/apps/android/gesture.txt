@@ -1,0 +1,78 @@
+//xml
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Gestures"
+        android:gravity="center"
+        android:id="@+id/gesture"
+         />
+
+</FrameLayout>
+
+//kt
+package com.example.myapplication
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.util.Log
+import android.view.MotionEvent
+import android.widget.TextView
+
+private const val TAG = "Gestures"
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        var gesture= findViewById <TextView>(R.id.gesture)
+        return when (event.action) {
+
+            MotionEvent.ACTION_DOWN -> {
+                // when we touch or tap on the screen
+                Log.d(TAG, "Action was DOWN")
+                gesture.text = "Action was DOWN"
+                true
+            }
+            MotionEvent.ACTION_MOVE -> {
+                // while pressing on the screen,
+                // we move our finger
+                Log.d(TAG, "Action was MOVE")
+                gesture.text = "Action was MOVE"
+
+                true
+            }
+            MotionEvent.ACTION_UP -> {
+                // Lifting up the finger after
+                // pressing on the screen
+                Log.d(TAG, "Action was UP")
+                gesture.text = "Action was UP"
+
+                true
+            }
+            MotionEvent.ACTION_CANCEL -> {
+                Log.d(TAG, "Action was CANCEL")
+                gesture.text = "Action was CANCEL"
+
+                true
+            }
+            MotionEvent.ACTION_OUTSIDE -> {
+                Log.d(TAG, "Movement occurred outside of screen element")
+                gesture.text = "Movement occurred screen element"
+
+                true
+            }
+            else -> super.onTouchEvent(event)
+        }
+    }
+}

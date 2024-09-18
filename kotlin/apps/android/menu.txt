@@ -1,0 +1,96 @@
+//activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+//MainActivity.kt
+package com.example.checkmenu
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menufile,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.help-> Toast.makeText(this,"help",Toast.LENGTH_SHORT).show()
+            R.id.info-> Toast.makeText(this,"info",Toast.LENGTH_SHORT).show()
+            R.id.setting-> Toast.makeText(this,"setting",Toast.LENGTH_SHORT).show()
+            R.id.exit-> Toast.makeText(this,"exit",Toast.LENGTH_SHORT).show()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+}
+
+
+
+//menufile.xml
+
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/mainmenu"
+        android:icon="@drawable/list"
+        android:title="start"
+        app:showAsAction="always">
+
+    <menu>
+        <item
+            android:id="@+id/exit"
+            android:title="exit"
+            android:icon="@drawable/exit"
+            app:showAsAction="never"/>
+
+        <item
+            android:id="@+id/info"
+            android:title="info"
+            android:icon="@drawable/about"
+            app:showAsAction="never"/>
+
+        <item
+            android:id="@+id/help"
+            android:title="Help"
+            android:icon="@drawable/help"
+            app:showAsAction="never"/>
+
+        <item
+            android:id="@+id/setting"
+            android:title="setting"
+            android:icon="@drawable/settings"
+            app:showAsAction="never"/>
+        </menu>
+
+        </item>
+
+
+
+</menu>
